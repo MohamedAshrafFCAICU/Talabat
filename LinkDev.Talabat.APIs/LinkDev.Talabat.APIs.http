@@ -1,6 +1,6 @@
-@LinkDev.Talabat.APIs_HostAddress = http://localhost:5264
+@BaseURL = http://localhost:5264
 
-GET {{LinkDev.Talabat.APIs_HostAddress}}/weatherforecast/
+GET {{BaseURL}}/api/weatherforecast/
 Accept: application/json
 
 ###
