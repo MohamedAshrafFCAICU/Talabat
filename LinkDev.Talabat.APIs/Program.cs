@@ -1,7 +1,6 @@
+using LinkDev.Talabat.APIs.Extensions;
+using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Infrastructure.Persistance;
-using LinkDev.Talabat.Infrastructure.Persistance.Data;
-using LinkDev.Talabat.Infrastructure.Persistance.Data.Seeds;
-using Microsoft.EntityFrameworkCore;
 
 namespace LinkDev.Talabat.APIs
 {
@@ -28,27 +27,9 @@ namespace LinkDev.Talabat.APIs
 
             var app = webApplicationbuilder.Build();
 
-            #region Update-Database
+            #region Databases Initialization
           
-            using var scope = app.Services.CreateAsyncScope();
-            var services = scope.ServiceProvider;
-            var dbContext = services.GetRequiredService<StoreContext>(); // Inject StoreContext Explicitly
-            var loggerFactory = services.GetRequiredService<ILoggerFactory>(); // Inject LoggerFactory Explicitly
-
-
-            try
-            {
-                var pendingMigrations = dbContext.Database.GetPendingMigrations();
-                if (pendingMigrations.Any())
-                    await dbContext.Database.MigrateAsync(); // Update - Database
-               
-                await StoreContextSeed.SeedAsync(dbContext);
-            }
-            catch (Exception ex)
-            {
-                var logger = loggerFactory.CreateLogger<Program>();
-                logger.LogError(ex, "An Exception has been occured While Pending The Migrations or seeding Data");
-            } 
+            await app.InitializeStoreContextAsync();
            
             #endregion
 
