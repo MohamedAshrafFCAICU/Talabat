@@ -1,10 +1,11 @@
 using LinkDev.Talabat.Infrastructure.Persistance;
 using LinkDev.Talabat.Infrastructure.Persistance.Data;
+using LinkDev.Talabat.Infrastructure.Persistance.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkDev.Talabat.APIs
 {
-    public  class Program
+    public class Program
     {
         public static async Task Main(string[] args)
         {
@@ -40,12 +41,13 @@ namespace LinkDev.Talabat.APIs
                 var pendingMigrations = dbContext.Database.GetPendingMigrations();
                 if (pendingMigrations.Any())
                     await dbContext.Database.MigrateAsync(); // Update - Database
-
+               
+                await StoreContextSeed.SeedAsync(dbContext);
             }
             catch (Exception ex)
             {
                 var logger = loggerFactory.CreateLogger<Program>();
-                logger.LogError(ex, "An Exception has been occured While Pending The Migrations");
+                logger.LogError(ex, "An Exception has been occured While Pending The Migrations or seeding Data");
             } 
            
             #endregion
