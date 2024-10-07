@@ -1,0 +1,43 @@
+[{
+        "Id": 0,
+        "Name": "Starbucks",
+        "CreatedBy": "1",
+        "LastModifiedBy": "1"
+    },
+    {
+        "Id": 0,
+        "Name": "Costa",
+        "CreatedBy": "2",
+        "LastModifiedBy": "2"
+    },
+    {
+        "Id": 0,
+        "Name": "Cilantro",
+        "CreatedBy": "3",
+        "LastModifiedBy": "3"
+    },
+    {
+        "Id": 0,
+        "Name": "TBS",
+        "CreatedBy": "4",
+        "LastModifiedBy": "4"
+    },
+    {
+        "Id": 0,
+        "Name": "On The Run",
+        "CreatedBy": "5",
+        "LastModifiedBy": "5"
+    },
+    {
+        "Id": 0,
+        "Name": "Caribou",
+        "CreatedBy": "6",
+        "LastModifiedBy": "6"
+    },
+    {
+        "Id": 0,
+        "Name": "Krispy Kreme",
+        "CreatedBy": "7",
+        "LastModifiedBy": "7"
+    }
+]
