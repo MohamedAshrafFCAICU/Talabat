@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LinkDev.Talabat.Core.Domain.Contracts
 {
     public interface IGenericRepository<TEntity , Tkey>
-        where TEntity : BaseEntity<Tkey>
+        where TEntity : BaseAuditableEntity<Tkey>
         where Tkey : IEquatable<Tkey>
     {
         Task<IEnumerable<TEntity>> GetAllAsync(bool WithTracking = false);
