@@ -1,4 +1,6 @@
 using LinkDev.Talabat.APIs.Extensions;
+using LinkDev.Talabat.APIs.Services;
+using LinkDev.Talabat.Core.Application.Abstraction;
 using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Infrastructure.Persistance;
 
@@ -18,6 +20,11 @@ namespace LinkDev.Talabat.APIs
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             webApplicationbuilder.Services.AddEndpointsApiExplorer();
             webApplicationbuilder.Services.AddSwaggerGen();
+
+            webApplicationbuilder.Services.AddHttpContextAccessor();    
+
+            webApplicationbuilder.Services.AddScoped<ILoggedInUserService , LoggedInUserService>();    
+
 
 
             webApplicationbuilder.Services.AddPersistanceServices(webApplicationbuilder.Configuration);

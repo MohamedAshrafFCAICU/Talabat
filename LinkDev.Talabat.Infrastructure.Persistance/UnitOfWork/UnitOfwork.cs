@@ -24,7 +24,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.UnitOfWork
             _repositories = new ();
         }
         public IGenericRepository<TEntity, Tkey> GetRepository<TEntity, Tkey>()
-          where TEntity : BaseAuditableEntity<Tkey>
+          where TEntity : BaseEntity<Tkey>
           where Tkey : IEquatable<Tkey>
         {
             return (IGenericRepository<TEntity, Tkey>)_repositories.GetOrAdd(typeof(TEntity).Name, new GenericRepository<TEntity, Tkey>(_dbContext));
