@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Core.Application.Abstraction.Services
+namespace LinkDev.Talabat.Core.Application.Abstraction.Services.Products
 {
     public interface IProductService
     {
@@ -13,8 +13,8 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.Services
 
         Task<ProductToReturnDto> GetProductAsync(int id);
 
-        Task<IEnumerable<BrandDto>> GetBrandsAsync();   
+        Task<IEnumerable<BrandDto>> GetBrandsAsync();
 
-        Task<IEnumerable<CategoryDto>> GetCategoriesAsync();    
+        Task<IEnumerable<CategoryDto>> GetCategoriesAsync();
     }
 }
