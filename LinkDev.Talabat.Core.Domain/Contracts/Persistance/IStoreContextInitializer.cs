@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Core.Domain.Contracts
+namespace LinkDev.Talabat.Core.Domain.Contracts.Persistance
 {
     public interface IStoreContextInitializer
     {
-        Task InitializeAsync(); 
-        Task SeedAsync();   
+        Task InitializeAsync();
+        Task SeedAsync();
     }
 }
