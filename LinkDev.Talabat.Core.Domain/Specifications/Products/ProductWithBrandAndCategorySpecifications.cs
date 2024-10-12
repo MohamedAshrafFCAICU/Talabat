@@ -8,15 +8,44 @@ using System.Threading.Tasks;
 namespace LinkDev.Talabat.Core.Domain.Specifications.Products
 {
     // This Class Responsible For Make The Expressions Needed To Get All Products  
-    public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product , int>
+    public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product, int>
     {
-        public ProductWithBrandAndCategorySpecifications() : base()
+        public ProductWithBrandAndCategorySpecifications(string? sort) : base()
         {
             AddIncludes();
+
+            //OrderBy(P => P.Name);
+            AddOrderBy(P => P.Name); 
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "nameDesc":
+                        //OrderByDesc(P => P.Name);
+                        AddOrderByDesc(P => P.Name);
+                        break;
+                    case "priceAsc":
+                        //OrderBy = P => P.Price;
+                        AddOrderBy(P => P.Price);
+                        break;
+                    case "priceDesc":
+                        //OrderByDesc(P => P.Price);
+                        AddOrderByDesc(P => P.Price);
+                        break;
+                    default:
+                        //OrderByc(P => P.Name);
+                        AddOrderBy(P => P.Name);
+                        break;
+                }
+            }
+           
         }
 
-        private void AddIncludes()
+        private protected override  void AddIncludes()
         {
+            base.AddIncludes();
+
             Includes.Add(P => P.Brand!);
             Includes.Add(P => P.Category!);
         }
@@ -26,5 +55,8 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.Products
         {
             AddIncludes();
         }
+
+       
+
     }
 }

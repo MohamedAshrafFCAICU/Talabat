@@ -20,6 +20,10 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Repositories.Generic_Reposi
             if (spec.Criteria is not null)
                 query = query.Where(spec.Criteria);
 
+            if (spec.OrderByDesc is not null)
+                query = query.OrderByDescending(spec.OrderByDesc);
+            else if(spec.OrderBy is not null)
+                query = query.OrderBy(spec.OrderBy);
 
             // query = _dbContext.Set<Product>.Where(P => P.Id.Equals(id))
 

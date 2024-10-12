@@ -14,7 +14,8 @@ namespace LinkDev.Talabat.Core.Domain.Specifications
     {
         public Expression<Func<TEntity , bool>>? Criteria { get; set; } = null;
         public List<Expression<Func<TEntity, object>>> Includes { get; set; } = new List<Expression<Func<TEntity, object>>>();
-
+        public Expression<Func<TEntity, object>>? OrderBy { get ; set; } = null ;
+        public Expression<Func<TEntity, object>>? OrderByDesc { get; set; } = null;
 
         public BaseSpecifications() // Consttructor Will Used To  Get All records => As I Make Criteria , Includes refer to NULL
         {
@@ -26,8 +27,21 @@ namespace LinkDev.Talabat.Core.Domain.Specifications
         {
             Criteria = E => E.Id.Equals(id);
         }
-      
+
+        private protected virtual void AddIncludes()
+        {
+          
+        }
+
+        private protected virtual void AddOrderBy(Expression<Func<TEntity, object>> OrderByExpression)
+        {
+            OrderBy = OrderByExpression;    
+        }
 
 
+        private protected virtual void AddOrderByDesc(Expression<Func<TEntity, object>> OrderByDescExpression)
+        {
+            OrderByDesc = OrderByDescExpression;
+        }
     }
 }
