@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20241009174453_ProductModuleMigration")]
+    [Migration("20241012080047_ProductModuleMigration")]
     partial class ProductModuleMigration
     {
         /// <inheritdoc />
@@ -20,7 +20,10 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
