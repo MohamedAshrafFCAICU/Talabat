@@ -17,5 +17,10 @@ namespace LinkDev.Talabat.Core.Domain.Contracts
 
         public Expression<Func<TEntity , object>>? OrderBy { get; set; } // For OrderBy LINQ Opreator Lamda Expression
         public Expression<Func<TEntity , object>>? OrderByDesc { get; set; } // For OrderByDescending LINQ Opreator Lamda Expression
+
+        public int Skip { get; set; }
+        public int Take { get; set; }
+
+        public bool IsPaginationEnabled { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.Products
     // This Class Responsible For Make The Expressions Needed To Get All Products  
     public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product, int>
     {
-        public ProductWithBrandAndCategorySpecifications(string? sort , int? brandId , int? categoryId) 
+        public ProductWithBrandAndCategorySpecifications(string? sort , int? brandId , int? categoryId , int pageSize , int pageIndex ) 
             : base(
                     
 
@@ -44,8 +44,14 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.Products
                     AddOrderBy(P => P.Name);
                     break;
             }
-            
-           
+
+
+            // Ex: 
+            // Total Products = 18 ~ 20 [Rounded Up To be dividable By 5]
+            // Page Size = 5
+            // So , The Number Of Pages  =4
+            // Page Index = 3
+            ApplyPagination(pageSize * (pageIndex - 1), pageSize); // (Skip , Take)
         }
 
         private protected override  void AddIncludes()

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LinkDev.Talabat.Core.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Core.Application.Abstraction.Services.Products;
+using LinkDev.Talabat.Core.Application.Abstraction.Specifications.Products;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Entities.Products;
 using LinkDev.Talabat.Core.Domain.Specifications;
@@ -17,9 +18,9 @@ namespace LinkDev.Talabat.Core.Application.Services.Products
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-        public async Task<IEnumerable<ProductToReturnDto>> GetProductsAsync(string? sort  , int? brandId , int? categoryId)
+        public async Task<IEnumerable<ProductToReturnDto>> GetProductsAsync(ProductSpecParams specParams)
         {
-            var spec = new ProductWithBrandAndCategorySpecifications(sort, brandId , categoryId);
+            var spec = new ProductWithBrandAndCategorySpecifications(specParams.Sort , specParams.BrandId , specParams.CategoryId , specParams.PageSize , specParams.PageIndex);
 
             var products = await _unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec);
             var productsToReturn = mapper.Map<IEnumerable<ProductToReturnDto>>(products);
