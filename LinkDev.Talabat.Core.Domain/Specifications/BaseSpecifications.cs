@@ -17,13 +17,18 @@ namespace LinkDev.Talabat.Core.Domain.Specifications
         public Expression<Func<TEntity, object>>? OrderBy { get ; set; } = null ;
         public Expression<Func<TEntity, object>>? OrderByDesc { get; set; } = null;
 
-        public BaseSpecifications() // Consttructor Will Used To  Get All records => As I Make Criteria , Includes refer to NULL
+        protected BaseSpecifications()
         {
-            //Criteria = null;
-        
+            
         }
 
-        public BaseSpecifications(Tkey id) // Constructor Used To Filter Based On the Id 
+        protected BaseSpecifications(Expression<Func<TEntity, bool>>? CriteriaExpression) // Consttructor Will Used To  Get All records => As I Make Criteria , Includes refer to NULL
+        {
+            Criteria = CriteriaExpression;
+
+        }
+
+        protected BaseSpecifications(Tkey id) // Constructor Used To Filter Based On the Id 
         {
             Criteria = E => E.Id.Equals(id);
         }

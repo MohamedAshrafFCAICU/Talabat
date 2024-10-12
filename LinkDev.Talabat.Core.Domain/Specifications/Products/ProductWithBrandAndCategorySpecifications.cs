@@ -10,35 +10,41 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.Products
     // This Class Responsible For Make The Expressions Needed To Get All Products  
     public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product, int>
     {
-        public ProductWithBrandAndCategorySpecifications(string? sort) : base()
+        public ProductWithBrandAndCategorySpecifications(string? sort , int? brandId , int? categoryId) 
+            : base(
+                    
+
+                  P => 
+                        (!brandId.HasValue || P.BrandId == brandId.Value)
+                                &&
+                        (!categoryId.HasValue || P.CategoryId == categoryId.Value)    
+
+                  )
         {
             AddIncludes();
 
             //OrderBy(P => P.Name);
-            AddOrderBy(P => P.Name); 
-
-            if (!string.IsNullOrEmpty(sort))
+          
+            switch (sort)
             {
-                switch (sort)
-                {
-                    case "nameDesc":
-                        //OrderByDesc(P => P.Name);
-                        AddOrderByDesc(P => P.Name);
-                        break;
-                    case "priceAsc":
-                        //OrderBy = P => P.Price;
-                        AddOrderBy(P => P.Price);
-                        break;
-                    case "priceDesc":
-                        //OrderByDesc(P => P.Price);
-                        AddOrderByDesc(P => P.Price);
-                        break;
-                    default:
-                        //OrderByc(P => P.Name);
-                        AddOrderBy(P => P.Name);
-                        break;
-                }
+                case "nameDesc":
+                    //OrderByDesc(P => P.Name);
+                    AddOrderByDesc(P => P.Name);
+                    break;
+                case "priceAsc":
+                    //OrderBy = P => P.Price;
+                    AddOrderBy(P => P.Price);
+                    break;
+                case "priceDesc":
+                    //OrderByDesc(P => P.Price);
+                    AddOrderByDesc(P => P.Price);
+                    break;
+                default:
+                    //OrderByc(P => P.Name);
+                    AddOrderBy(P => P.Name);
+                    break;
             }
+            
            
         }
 
