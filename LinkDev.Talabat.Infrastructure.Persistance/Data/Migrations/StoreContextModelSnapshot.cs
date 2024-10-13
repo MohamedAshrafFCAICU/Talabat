@@ -63,6 +63,11 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("NormalizedName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("PictureUrl")
                         .HasColumnType("nvarchar(max)");
 

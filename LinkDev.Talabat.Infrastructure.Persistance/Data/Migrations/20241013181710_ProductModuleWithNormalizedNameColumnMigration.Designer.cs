@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20241012080047_ProductModuleMigration")]
-    partial class ProductModuleMigration
+    [Migration("20241013181710_ProductModuleWithNormalizedNameColumnMigration")]
+    partial class ProductModuleWithNormalizedNameColumnMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,11 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NormalizedName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");

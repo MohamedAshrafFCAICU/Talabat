@@ -10,11 +10,13 @@ namespace LinkDev.Talabat.Core.Domain.Specifications.Products
     // This Class Responsible For Make The Expressions Needed To Get All Products  
     public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product, int>
     {
-        public ProductWithBrandAndCategorySpecifications(string? sort , int? brandId , int? categoryId , int pageSize , int pageIndex ) 
+        public ProductWithBrandAndCategorySpecifications(string? sort , int? brandId , int? categoryId , int pageSize , int pageIndex , string? search) 
             : base(
                     
 
                   P => 
+                        (string.IsNullOrEmpty(search) || P.NormalizedName.Contains(search))
+                                &&
                         (!brandId.HasValue || P.BrandId == brandId.Value)
                                 &&
                         (!categoryId.HasValue || P.CategoryId == categoryId.Value)    
