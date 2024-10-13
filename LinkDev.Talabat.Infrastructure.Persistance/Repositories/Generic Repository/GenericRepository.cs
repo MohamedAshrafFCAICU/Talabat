@@ -43,6 +43,10 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Repositories
         {
             return await ApplySpecifications(spec).FirstOrDefaultAsync();
         }
+        public async Task<int> GetCountAsync(ISpecifications<TEntity, Tkey> spec)
+        {
+            return await ApplySpecifications(spec).CountAsync();
+        }
 
         public async Task AddAsync(TEntity entity) => await dbContext.Set<TEntity>().AddAsync(entity);
         public void Update(TEntity entity) => dbContext.Set<TEntity>().Update(entity);        
@@ -56,6 +60,8 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Repositories
         {
             return  SpecificationsEvaluator<TEntity, Tkey>.GetQuery(dbContext.Set<TEntity>(), spec);
         }
+
+       
 
         #endregion
 
