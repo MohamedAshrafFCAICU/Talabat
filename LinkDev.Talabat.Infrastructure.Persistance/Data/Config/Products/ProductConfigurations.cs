@@ -16,6 +16,7 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Config.Products
             base.Configure(builder);
 
             builder.Property(P => P.Name).HasMaxLength(100).IsRequired();
+            builder.Property(P => P.NormalizedName).HasMaxLength(100).IsRequired();
             builder.Property(P => P.Description).IsRequired();
             builder.Property(P => P.Price).HasColumnType("decimal(9 , 2)");
 
