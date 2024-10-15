@@ -5,7 +5,6 @@ using LinkDev.Talabat.APIs.Services;
 using LinkDev.Talabat.Core.Application;
 using LinkDev.Talabat.Core.Application.Abstraction;
 using LinkDev.Talabat.Infrastructure.Persistance;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.APIs
@@ -27,8 +26,12 @@ namespace LinkDev.Talabat.APIs
                 options.InvalidModelStateResponseFactory = (actionContext) =>
                 {
                     var errors = actionContext.ModelState.Where(P => P.Value!.Errors.Count > 0)
-                                       .SelectMany(P => P.Value!.Errors)
-                                       .Select(E => E.ErrorMessage);
+                                       .Select(P => new ApiValidationErrorResponse.ValidationError()
+                                       {
+                                           Field = P.Key,
+                                           Errors = P.Value!.Errors.Select(E => E.ErrorMessage)
+                                       });
+                                  
 
                     return new BadRequestObjectResult(new ApiValidationErrorResponse()
                     {
@@ -39,23 +42,24 @@ namespace LinkDev.Talabat.APIs
             })
             .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
-            webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = false;
-                options.InvalidModelStateResponseFactory = (actionContext) =>
-                {
-                    var errors = actionContext.ModelState.Where(P => P.Value!.Errors.Count > 0)
-                                       .SelectMany(P => P.Value!.Errors)
-                                       .Select(E => E.ErrorMessage);
+            //webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
+            //{
+            //    options.SuppressModelStateInvalidFilter = false;
+            //    options.InvalidModelStateResponseFactory = (actionContext) =>
+            //    {
+            //        var errors = actionContext.ModelState.Where(P => P.Value!.Errors.Count > 0)
+            //                           .SelectMany(P => P.Value!.Errors)
+            //                           .Select(E => E.ErrorMessage);
 
-                    return new BadRequestObjectResult(new ApiValidationErrorResponse()
-                    {
-                        Errors = errors
-                    });
-                };
-            });
+            //        return new BadRequestObjectResult(new ApiValidationErrorResponse()
+            //        {
+            //            Errors = errors
+            //        });
+            //    };
+            //});
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+           
             webApplicationbuilder.Services.AddEndpointsApiExplorer();
             webApplicationbuilder.Services.AddSwaggerGen();
 
@@ -81,7 +85,7 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Kestrel Middlewares
 
-            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

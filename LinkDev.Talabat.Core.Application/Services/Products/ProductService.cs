@@ -3,15 +3,10 @@ using LinkDev.Talabat.Core.Application.Abstraction.Common;
 using LinkDev.Talabat.Core.Application.Abstraction.Models.Products;
 using LinkDev.Talabat.Core.Application.Abstraction.Services.Products;
 using LinkDev.Talabat.Core.Application.Abstraction.Specifications.Products;
+using LinkDev.Talabat.Core.Application.Exceptions;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Entities.Products;
-using LinkDev.Talabat.Core.Domain.Specifications;
 using LinkDev.Talabat.Core.Domain.Specifications.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Application.Services.Products
 {
@@ -36,9 +31,10 @@ namespace LinkDev.Talabat.Core.Application.Services.Products
         {
             var spec = new ProductWithBrandAndCategorySpecifications(id);
 
-          
-
             var product = await _unitOfWork.GetRepository<Product, int>().GetWithSpecAsync(spec);
+
+            if (product is null)
+                throw new NotFoundException(nameof(Product), id);
 
             var productToReturn = mapper.Map<ProductToReturnDto>(product);
 
