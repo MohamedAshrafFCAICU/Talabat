@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using LinkDev.Talabat.Core.Domain.Contracts.Infrastructure;
+using LinkDev.Talabat.Infrastructure.BasketRepository;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 using System;
@@ -20,7 +22,7 @@ namespace LinkDev.Talabat.Infrastructure
 
             });
 
-
+             services.AddScoped(typeof(IBasketRepository), typeof(BasketRepository.BasketRepository));
              return services;    
         }
     }
