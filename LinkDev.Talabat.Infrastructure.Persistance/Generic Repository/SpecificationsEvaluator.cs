@@ -7,7 +7,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Infrastructure.Persistance.Repositories.Generic_Repository
+namespace LinkDev.Talabat.Infrastructure.Persistance.Generic_Repository
 {
     internal static class SpecificationsEvaluator<TEntity , Tkey>
         where TEntity : BaseEntity<Tkey>
