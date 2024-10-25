@@ -1,7 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Entities.Products;
-using LinkDev.Talabat.Infrastructure.Persistance._Common;
+using LinkDev.Talabat.Infrastructure.Persistance.Common;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 
 namespace LinkDev.Talabat.Infrastructure.Persistance.Data
 {

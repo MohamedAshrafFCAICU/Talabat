@@ -1,12 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Entities.Identity;
-using LinkDev.Talabat.Infrastructure.Persistance._Common;
-using LinkDev.Talabat.Infrastructure.Persistance.Data;
+using LinkDev.Talabat.Infrastructure.Persistance.Common;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Persistance._Identity.Config
 {

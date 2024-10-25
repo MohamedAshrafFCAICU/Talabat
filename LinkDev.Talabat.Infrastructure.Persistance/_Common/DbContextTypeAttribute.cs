@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.Talabat.Infrastructure.Persistance._Common
+namespace LinkDev.Talabat.Infrastructure.Persistance.Common
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class DbContextTypeAttribute : Attribute

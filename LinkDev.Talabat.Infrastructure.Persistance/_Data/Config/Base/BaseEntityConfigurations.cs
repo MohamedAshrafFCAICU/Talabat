@@ -1,5 +1,5 @@
 ﻿using LinkDev.Talabat.Core.Domain.Common;
-using LinkDev.Talabat.Infrastructure.Persistance._Common;
+using LinkDev.Talabat.Infrastructure.Persistance.Common;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
