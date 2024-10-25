@@ -22,29 +22,25 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Services
             
-            // Add services to the container.
 
             webApplicationbuilder.Services.AddControllers()
-            .ConfigureApiBehaviorOptions(options =>
-            {
-                options.SuppressModelStateInvalidFilter = false;
-                options.InvalidModelStateResponseFactory = (actionContext) =>
+                .ConfigureApiBehaviorOptions(options =>
                 {
-                    var errors = actionContext.ModelState.Where(P => P.Value!.Errors.Count > 0)
-                                       .Select(P => new ApiValidationErrorResponse.ValidationError()
-                                       {
-                                           Field = P.Key,
-                                           Errors = P.Value!.Errors.Select(E => E.ErrorMessage)
-                                       });
-                                  
-
-                    return new BadRequestObjectResult(new ApiValidationErrorResponse()
+                    options.SuppressModelStateInvalidFilter = false;
+                    options.InvalidModelStateResponseFactory = (actionContext) =>
                     {
-                        Errors = errors
-                    });
-                };
+                      
+                        var errors = actionContext.ModelState
+                            .Where(p => p.Value!.Errors.Count > 0)
+                            .SelectMany(p => p.Value!.Errors.Select(e => $"{p.Key}: {e.ErrorMessage}"));
 
-            })
+                        return new BadRequestObjectResult(new ApiValidationErrorResponse
+                        {
+                            Errors = errors
+                        });
+                    };
+
+                })
             .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
             //webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>

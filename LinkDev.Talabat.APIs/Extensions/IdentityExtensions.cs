@@ -21,12 +21,12 @@ namespace LinkDev.Talabat.APIs.Extensions
                 idebtityOptions.SignIn.RequireConfirmedPhoneNumber = true;
 
 
-                idebtityOptions.Password.RequireNonAlphanumeric = true;
-                idebtityOptions.Password.RequiredUniqueChars = 2;
-                idebtityOptions.Password.RequiredLength = 6;
-                idebtityOptions.Password.RequireDigit = true;
-                idebtityOptions.Password.RequireLowercase = true;
-                idebtityOptions.Password.RequireUppercase = true;
+                //idebtityOptions.Password.RequireNonAlphanumeric = true;
+                //idebtityOptions.Password.RequiredUniqueChars = 2;
+                //idebtityOptions.Password.RequiredLength = 6;
+                //idebtityOptions.Password.RequireDigit = true;
+                //idebtityOptions.Password.RequireLowercase = true;
+                //idebtityOptions.Password.RequireUppercase = true;
 
 
                 idebtityOptions.Lockout.AllowedForNewUsers = true;
