@@ -1,5 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Contracts.Persistance.DbInitializer;
+using LinkDev.Talabat.Core.Domain.Entities.Identity;
 using LinkDev.Talabat.Infrastructure.Persistance._Identity;
 using LinkDev.Talabat.Infrastructure.Persistance.Data;
 using LinkDev.Talabat.Infrastructure.Persistance.Data.Interceptors;
@@ -38,11 +39,14 @@ namespace LinkDev.Talabat.Infrastructure.Persistance
                 .UseSqlServer(Configuration.GetConnectionString("IdentityContext"));
             });
 
-            Services.AddScoped(typeof(IStoreIdentityDbInitializer), typeof(IStoreIdentityDbInitializer));
+            Services.AddScoped(typeof(IStoreIdentityDbInitializer), typeof(StoreIdentityDbInitializer));
 
             #endregion
 
             Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork.UnitOfwork));
+
+
+          
 
             return Services;
         }

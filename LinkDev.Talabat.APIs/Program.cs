@@ -4,8 +4,12 @@ using LinkDev.Talabat.APIs.Middlewares;
 using LinkDev.Talabat.APIs.Services;
 using LinkDev.Talabat.Core.Application;
 using LinkDev.Talabat.Core.Application.Abstraction;
+using LinkDev.Talabat.Core.Domain.Entities.Identity;
 using LinkDev.Talabat.Infrastructure;
 using LinkDev.Talabat.Infrastructure.Persistance;
+using LinkDev.Talabat.Infrastructure.Persistance._Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.APIs
@@ -75,13 +79,16 @@ namespace LinkDev.Talabat.APIs
             webApplicationbuilder.Services.AddApplicationServices();
 
             webApplicationbuilder.Services.AddInfrastructureServices(webApplicationbuilder.Configuration);
+
+            webApplicationbuilder.Services.AddIdentityService();
+           
             #endregion
 
             var app = webApplicationbuilder.Build();
 
             #region Databases Initialization
           
-            await app.InitializeStoreContextAsync();
+            await app.InitializeDbAsync();
 
             #endregion
 

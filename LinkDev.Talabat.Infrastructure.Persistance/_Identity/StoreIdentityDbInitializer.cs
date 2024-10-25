@@ -11,16 +11,19 @@ namespace LinkDev.Talabat.Infrastructure.Persistance._Identity
      
         public override async Task SeedAsync()
         {
-          
-            var user = new ApplicationUser()
-            {
-                DisplayName = "Ahmed Nasr",
-                UserName = "ahmed.nasr",
-                Email = "ahmed.nasr@linkdev.com",
-                PhoneNumber = "01122334455",
-            }; 
 
-            await userManager.CreateAsync(user , "P@ssw0rd");    
+            if (!dbContext.Users.Any())
+            {
+                var user = new ApplicationUser()
+                {
+                    DisplayName = "Ahmed Nasr",
+                    UserName = "ahmed.nasr",
+                    Email = "ahmed.nasr@linkdev.com",
+                    PhoneNumber = "01122334455",
+                };
+
+                await userManager.CreateAsync(user, "P@ssw0rd");     
+            }
             
 
         }
