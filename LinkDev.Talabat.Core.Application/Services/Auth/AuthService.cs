@@ -90,7 +90,7 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
             }.Union(userClaims)
              .Union(rolesAsClaims);
 
-            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-256-bit-secret"));
+            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-256-bit-secretfbgdbkgmdlnmgmlnf"));
             var signinCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
             
             var tokenObj = new JwtSecurityToken
