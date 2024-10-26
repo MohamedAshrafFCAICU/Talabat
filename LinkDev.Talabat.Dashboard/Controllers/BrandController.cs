@@ -1,5 +1,6 @@
 ﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Entities.Products;
+using LinkDev.Talabat.Dashboard.Models.Brands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.Talabat.Dashboard.Controllers
@@ -8,22 +9,37 @@ namespace LinkDev.Talabat.Dashboard.Controllers
 	{
 		public async Task<IActionResult> Index()
 		{
-			var brands = await _unitOfWork.GetRepository<ProductBrand , int>().GetAllAsync();	
-			return View(brands);
+			var brands = await _unitOfWork.GetRepository<ProductBrand , int>().GetAllAsync();
+
+			var mappedBrands = brands.Select(b => new BrandViewModel()
+			{
+				Id = b.Id,
+				Name = b.Name,
+			}).ToList();
+
+			return View(mappedBrands);
 		}
 
-		public async Task<IActionResult> Create(ProductBrand model)
+		public async Task<IActionResult> Create(BrandViewModel model)
 		{
 			try
 			{
-				await _unitOfWork.GetRepository<ProductBrand, int>().AddAsync(model);
+				var mappedBrand = new ProductBrand()
+				{
+					Id = model.Id,
+					Name = model.Name,
+					CreatedBy = "1",
+					LastModifiedBy = "1",
+
+				};
+				await _unitOfWork.GetRepository<ProductBrand, int>().AddAsync(mappedBrand);
 				await _unitOfWork.CompleteAsync();
 				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception)
 			{
 				ModelState.AddModelError("Name", "Please Enter New Name");
-				return View("Index" ,await _unitOfWork.GetRepository<ProductBrand, int>().GetAllAsync());
+				return RedirectToAction(nameof(Index));
 			}
 		}
 

@@ -1,9 +1,9 @@
-﻿@model IReadOnlyList<ProductBrand>
+﻿@model List<BrandViewModel>
 @{
     ViewData["Title"] = "Index";
 }
 <h1>All Brands</h1>
-<partial name="CreateFormPartialView" />
+<partial name="CreateFormPartialView" model="new BrandViewModel()"/>
 @if (Model.Count() > 0)
 {
     <table class="table table-striped table-hover">
