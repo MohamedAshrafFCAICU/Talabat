@@ -1,25 +1,13 @@
-﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
+﻿using LinkDev.Talabat.Core.Domain.Contracts.Persistance.DbInitializer;
 using LinkDev.Talabat.Core.Domain.Entities.Products;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using LinkDev.Talabat.Infrastructure.Persistance.Common;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Persistance.Data
 {
-    public class StoreContextInitializer(StoreContext dbContext) : IStoreContextInitializer
+    public class StoreDbInitializer(StoreDbContext dbContext) : DbInitializer(dbContext), IStoreDbInitializer
     {
-        public async Task InitializeAsync()
-        {
-            var pendingMigrations = dbContext.Database.GetPendingMigrations();
-            if (pendingMigrations.Any())
-                await dbContext.Database.MigrateAsync(); // Update - Database
-        }
-
-        public async Task SeedAsync()
+        public override async Task SeedAsync()
         {
             if (!dbContext.Brands.Any())
             {

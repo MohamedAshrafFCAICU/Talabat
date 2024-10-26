@@ -18,29 +18,25 @@ namespace LinkDev.Talabat.APIs
 
             #region Configure Services
             
-            // Add services to the container.
 
             webApplicationbuilder.Services.AddControllers()
-            .ConfigureApiBehaviorOptions(options =>
-            {
-                options.SuppressModelStateInvalidFilter = false;
-                options.InvalidModelStateResponseFactory = (actionContext) =>
+                .ConfigureApiBehaviorOptions(options =>
                 {
-                    var errors = actionContext.ModelState.Where(P => P.Value!.Errors.Count > 0)
-                                       .Select(P => new ApiValidationErrorResponse.ValidationError()
-                                       {
-                                           Field = P.Key,
-                                           Errors = P.Value!.Errors.Select(E => E.ErrorMessage)
-                                       });
-                                  
-
-                    return new BadRequestObjectResult(new ApiValidationErrorResponse()
+                    options.SuppressModelStateInvalidFilter = false;
+                    options.InvalidModelStateResponseFactory = (actionContext) =>
                     {
-                        Errors = errors
-                    });
-                };
+                      
+                        var errors = actionContext.ModelState
+                            .Where(p => p.Value!.Errors.Count > 0)
+                            .SelectMany(p => p.Value!.Errors.Select(e => $"{p.Key}: {e.ErrorMessage}"));
 
-            })
+                        return new BadRequestObjectResult(new ApiValidationErrorResponse
+                        {
+                            Errors = errors
+                        });
+                    };
+
+                })
             .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
 
             //webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -75,13 +71,16 @@ namespace LinkDev.Talabat.APIs
             webApplicationbuilder.Services.AddApplicationServices();
 
             webApplicationbuilder.Services.AddInfrastructureServices(webApplicationbuilder.Configuration);
+
+            webApplicationbuilder.Services.AddIdentityService(webApplicationbuilder.Configuration);
+           
             #endregion
 
             var app = webApplicationbuilder.Build();
 
             #region Databases Initialization
           
-            await app.InitializeStoreContextAsync();
+            await app.InitializeDbAsync();
 
             #endregion
 
@@ -103,12 +102,14 @@ namespace LinkDev.Talabat.APIs
 
             app.UseStatusCodePagesWithReExecute("/Errors/{0}");
 
-            app.UseAuthentication();    
-            app.UseAuthorization(); 
+           
 
             app.UseAuthorization();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
