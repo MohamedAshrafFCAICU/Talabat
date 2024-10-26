@@ -1,6 +1,9 @@
+using LinkDev.Talabat.Core.Domain.Contracts.Persistance;
 using LinkDev.Talabat.Core.Domain.Entities.Identity;
+using LinkDev.Talabat.Dashboard.Mapping;
 using LinkDev.Talabat.Infrastructure.Persistance._Identity;
 using LinkDev.Talabat.Infrastructure.Persistance.Data;
+using LinkDev.Talabat.Infrastructure.Persistance.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -69,7 +72,8 @@ namespace LinkDev.Talabat.Dashboard
 
             #endregion
 
-
+            webApplicationBuilder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfwork));
+            webApplicationBuilder.Services.AddAutoMapper(typeof(MappingProfile));
 
             #endregion
 

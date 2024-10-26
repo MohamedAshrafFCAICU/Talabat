@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Infrastructure.Persistance.UnitOfWork
 {
-    internal class UnitOfwork : IUnitOfWork
+    public class UnitOfwork : IUnitOfWork
     {
         private readonly StoreDbContext _dbContext;
         private readonly ConcurrentDictionary<string, object> _repositories;
