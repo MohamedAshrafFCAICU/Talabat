@@ -94,7 +94,7 @@ namespace LinkDev.Talabat.Dashboard
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=admin}/{action=Login}/{id?}");
 
             #endregion
             
