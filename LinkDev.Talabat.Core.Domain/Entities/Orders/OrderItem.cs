@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkDev.Talabat.Core.Domain.Entities.Orders
 {
-    public class OrderItems : BaseAuditableEntity<int>
+    public class OrderItem : BaseAuditableEntity<int>
     {
 
         public required ProductItemOrder Product { get; set; }
