@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using LinkDev.Talabat.Core.Application.Abstraction.Services;
 using LinkDev.Talabat.Core.Application.Abstraction.Services.Basket;
+using LinkDev.Talabat.Core.Application.Abstraction.Services.Orders;
 using LinkDev.Talabat.Core.Application.Abstraction.Services.Products;
 using LinkDev.Talabat.Core.Application.Mapping;
 using LinkDev.Talabat.Core.Application.Services;
 using LinkDev.Talabat.Core.Application.Services.Basket;
+using LinkDev.Talabat.Core.Application.Services.Orders;
 using LinkDev.Talabat.Core.Application.Services.Products;
 using LinkDev.Talabat.Core.Domain.Contracts.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -27,11 +29,18 @@ namespace LinkDev.Talabat.Core.Application
             services.AddScoped(typeof(IProductService), typeof(ProductService));
             services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
 
-            //services.AddScoped(typeof(IBasketService), typeof(BasketService));
             //services.AddScoped(typeof(Func<IBasketService>), typeof(Func<BasketService>));
+            services.AddScoped(typeof(IBasketService), typeof(BasketService));
             services.AddScoped(typeof(Func<IBasketService>) , (serviceProvide) =>
             {
                 return () => serviceProvide.GetRequiredService<IBasketService>();   
+            });
+
+
+            services.AddScoped(typeof(IOrderService),typeof(OrderService));
+            services.AddScoped(typeof(Func<IOrderService>), (serviceProvide) =>
+            {
+                return () => serviceProvide.GetRequiredService<IOrderService>();
             });
 
             return services;
