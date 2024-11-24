@@ -7,6 +7,7 @@ using LinkDev.Talabat.Core.Application.Abstraction;
 using LinkDev.Talabat.Infrastructure;
 using LinkDev.Talabat.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace LinkDev.Talabat.APIs
 {
@@ -20,6 +21,10 @@ namespace LinkDev.Talabat.APIs
             
 
             webApplicationbuilder.Services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                })
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     options.SuppressModelStateInvalidFilter = false;
@@ -37,7 +42,8 @@ namespace LinkDev.Talabat.APIs
                     };
 
                 })
-            .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly);
+            .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly)
+            ;
 
             //webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
             //{

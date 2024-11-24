@@ -79,8 +79,8 @@ namespace LinkDev.Talabat.Dashboard
 
             var app = webApplicationBuilder.Build();
 
-
             #region Configure Kestrel Middlewares
+
 
             
             if (!app.Environment.IsDevelopment())
