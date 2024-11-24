@@ -24,6 +24,12 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
 
         private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
+        public async Task<bool> EmailExistance(string email)
+        {
+           
+            return await userManager.FindByEmailAsync(email!) is not null;
+        }
+
         public async Task<UserDto> GetCurrentUser(ClaimsPrincipal claimsPrincipal)
         {
             var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
@@ -84,6 +90,9 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
 
         public async Task<UserDto> RegisterAsync(RegisterDto model)
         {
+            //if (EmailExistance(model.Email).Result)
+            //    throw new BadRequestException("This Email is Already in Use");
+
             var user = new ApplicationUser()
             { 
                 DisplayName = model.DisplayName,
@@ -95,7 +104,7 @@ namespace LinkDev.Talabat.Core.Application.Services.Auth
 
             var result= await userManager.CreateAsync(user , model.Password);
 
-            if (!result.Succeeded) throw new ValidationException() { Errors = result.Errors.Select(E => E.Description) };
+            if (!result.Succeeded) throw new ValidationException() { Errors = result.Errors.Select(E => E.Description).ToArray() };
 
             var response = new UserDto()
             {

@@ -20,5 +20,8 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.Services.Auth
         Task<AddressDto?> GetUserAddress(ClaimsPrincipal claimsPrincipal);
 
         Task<AddressDto> UpdateUserAddress(ClaimsPrincipal claimsPrincipal , AddressDto addressDto);
+
+        Task<bool> EmailExistance(string email);
+    
     }
 }
