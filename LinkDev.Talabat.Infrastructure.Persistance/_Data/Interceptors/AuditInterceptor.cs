@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Interceptors
 {
-    internal class CustomSaveChangesInterceptors : SaveChangesInterceptor
+    internal class AuditInterceptor : SaveChangesInterceptor
     {
         private readonly ILoggedInUserService _loggedInUserService;
 
-        public CustomSaveChangesInterceptors(ILoggedInUserService loggedInUserService)
+        public AuditInterceptor(ILoggedInUserService loggedInUserService)
         {
             _loggedInUserService = loggedInUserService;
         }
@@ -19,19 +19,24 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Data.Interceptors
             return base.SavingChanges(eventData, result);
         }
 
-        public override ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result, CancellationToken cancellationToken = default)
-        {
 
-            return base.SavedChangesAsync(eventData, result, cancellationToken);
+        public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+        {
+            UpdateEntities(eventData.Context);
+            return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
-        private void UpdateEntities(DbContext dbContext)
+     
+
+        private void UpdateEntities(DbContext? dbContext)
         {
             if (dbContext is null)
                 return;
 
-            foreach (var entry in dbContext.ChangeTracker.Entries<BaseAuditableEntity<int>>()
-                .Where(entity => entity.State is EntityState.Added or EntityState.Modified))
+            var entries = dbContext.ChangeTracker.Entries<IBaseAuditableEntity>()
+                .Where(entity => entity.State is EntityState.Added or EntityState.Modified);
+
+            foreach (var entry in entries)
             {
                 if(entry.State is EntityState.Added)
                 {

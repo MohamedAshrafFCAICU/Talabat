@@ -52,8 +52,6 @@ namespace LinkDev.Talabat.Core.Application.Services.Orders
                             Price = product.Price,
                             Quantity = item.Quantity,
 
-                            CreatedBy = "1",// To Be Changed After Modifing The Interceptor
-                            LastModifiedBy = "1",// To Be Changed After Modifing The Interceptor
                         };
 
                         orderItems.Add(orderItem);
@@ -89,9 +87,6 @@ namespace LinkDev.Talabat.Core.Application.Services.Orders
                 Items = orderItems,
                 SubTotal = subTotal,
                 DeliveryMethod = deliveryMethod,
-
-                CreatedBy = "1",// To Be Changed After Modifing The Interceptor
-                LastModifiedBy = "1",// To Be Changed After Modifing The Interceptor
 
             };
 

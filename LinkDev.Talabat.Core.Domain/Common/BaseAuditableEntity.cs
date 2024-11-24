@@ -1,17 +1,31 @@
 ﻿namespace LinkDev.Talabat.Core.Domain.Common
 {
 
-    public abstract class BaseAuditableEntity<Tkey> : BaseEntity<Tkey>
+    public interface IBaseAuditableEntity
+    {
+
+        public  string CreatedBy { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public  string LastModifiedBy { get; set; }
+
+        public DateTime LastModifiedOn { get; set; }
+
+    }
+
+
+    public abstract class BaseAuditableEntity<Tkey> : BaseEntity<Tkey> , IBaseAuditableEntity
         where Tkey : IEquatable<Tkey>
     {
 
-        public required string CreatedBy { get; set; } = null!;
+        public string CreatedBy { get; set; } = null!;
 
-        public DateTime CreatedOn { get; set; } 
+        public DateTime CreatedOn { get; set; }
 
-        public required string LastModifiedBy { get; set; } = null!;
+        public string LastModifiedBy { get; set; } = null!;
 
-        public DateTime? LastModifiedOn { get; set; } = DateTime.Now;
+        public DateTime LastModifiedOn { get; set; } 
 
     }
 }

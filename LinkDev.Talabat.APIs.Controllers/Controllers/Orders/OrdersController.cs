@@ -18,9 +18,7 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Orders
         [HttpPost] //POST: /api/Orders
         public async Task<ActionResult<OrderToReturnDto>> CreateOrder(OrderToCreateDto orderDto)
         {
-            //var buyerEmail = User.FindFirstValue(ClaimTypes.Email);
-
-            var buyerEmail = "ahmed.nasr@linkdev.com"; // To Be Changed After Modifing The Interceptor
+            var buyerEmail = User.FindFirstValue(ClaimTypes.Email);
 
             var result = await serviceManager.OrderService.CreateOrderAsync(buyerEmail!, orderDto);
 
@@ -30,11 +28,9 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Orders
         [HttpGet] //GET: /api/Orders
         public async Task<ActionResult<IEnumerable<OrderToReturnDto>>> GetOrdersForUser()
         {
-            //var buyerEmail = User.FindFirstValue(ClaimTypes.Email);
-
-            var buyerEmail = "ahmed.nasr@linkdev.com"; // To Be Changed After Modifing The Interceptor
-
-            var result = await serviceManager.OrderService.GetOrdersForUserAsync(buyerEmail);
+            var buyerEmail = User.FindFirstValue(ClaimTypes.Email);
+         
+            var result = await serviceManager.OrderService.GetOrdersForUserAsync(buyerEmail!);
                     
             return Ok(result);
         }
@@ -42,11 +38,9 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Orders
         [HttpGet("{id}")] //GET: /api/Orders/{id}
         public async Task<ActionResult<OrderToReturnDto>> GetOrder(int id)
         {
-            //var buyerEmail = User.FindFirstValue(ClaimTypes.Email);
+            var buyerEmail = User.FindFirstValue(ClaimTypes.Email);
 
-            var buyerEmail = "ahmed.nasr@linkdev.com"; // To Be Changed After Modifing The Interceptor
-
-            var result = await serviceManager.OrderService.CreateOrderByIdAsync( buyerEmail, id);
+            var result = await serviceManager.OrderService.CreateOrderByIdAsync( buyerEmail!, id);
 
             return Ok(result);
         }

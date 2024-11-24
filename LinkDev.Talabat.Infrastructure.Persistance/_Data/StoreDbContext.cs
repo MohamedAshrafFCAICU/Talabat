@@ -18,6 +18,8 @@ namespace LinkDev.Talabat.Infrastructure.Persistance.Data
                  type => type.GetCustomAttribute<DbContextTypeAttribute>()?.DbContextType == typeof(StoreDbContext));
         }
 
+   
+
         public DbSet<Product> Products { get; set; }
 
         public DbSet<ProductBrand> Brands { get; set; }
