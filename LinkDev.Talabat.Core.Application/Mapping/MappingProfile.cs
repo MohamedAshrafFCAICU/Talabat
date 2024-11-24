@@ -54,7 +54,7 @@ namespace LinkDev.Talabat.Core.Application.Mapping
 
             CreateMap<DeliveryMethod, DeliveryMethodDto>();
 
-            CreateMap<UserAddress, AddressDto>();
+            CreateMap<UserAddress, AddressDto>().ReverseMap();
             
         }
     }
