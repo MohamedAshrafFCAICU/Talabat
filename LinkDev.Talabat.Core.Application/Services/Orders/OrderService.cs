@@ -51,6 +51,9 @@ namespace LinkDev.Talabat.Core.Application.Services.Orders
                             Product = productItemOrdered,
                             Price = product.Price,
                             Quantity = item.Quantity,
+
+                            CreatedBy = "1",// To Be Changed After Modifing The Interceptor
+                            LastModifiedBy = "1",// To Be Changed After Modifing The Interceptor
                         };
 
                         orderItems.Add(orderItem);
@@ -70,7 +73,14 @@ namespace LinkDev.Talabat.Core.Application.Services.Orders
 
             var address = mapper.Map<Address>(order.ShippingAddress);
 
-            // 5.Create Order
+
+
+            // 5.Get Delivery Method
+
+            var deliveryMethod = await unitOfWork.GetRepository<DeliveryMethod, int>().GetAsync(order.DeliveryMethodId);
+
+            // 6.Create Order
+
 
             var orderToCreate = new Order()
             {
@@ -78,13 +88,16 @@ namespace LinkDev.Talabat.Core.Application.Services.Orders
                 ShippingAddress = address,
                 Items = orderItems,
                 SubTotal = subTotal,
-                DeliveryMethodId = order.DeliveryMethodId,
+                DeliveryMethod = deliveryMethod,
+
+                CreatedBy = "1",// To Be Changed After Modifing The Interceptor
+                LastModifiedBy = "1",// To Be Changed After Modifing The Interceptor
 
             };
 
             await unitOfWork.GetRepository<Order , int>().AddAsync(orderToCreate);
            
-            // 5.Save To Database
+            // 7.Save To Database
 
             var created =await unitOfWork.CompleteAsync() > 0;
 

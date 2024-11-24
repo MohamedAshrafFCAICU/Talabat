@@ -16,7 +16,6 @@ namespace LinkDev.Talabat.Core.Application.Services
     {
         private readonly Lazy<IOrderService> orderService;
         private readonly Lazy<IProductService> productService;
-        private readonly Lazy<IEmployeeService> employeeService;
         private readonly Lazy<IBasketService> basketService;
         private readonly Lazy<IAuthService> authService;
 
@@ -37,8 +36,6 @@ namespace LinkDev.Talabat.Core.Application.Services
         }
 
         public IProductService ProductService  => productService.Value;
-
-        public IEmployeeService EmployeeService => employeeService.Value;
 
         public IBasketService BasketService => basketService.Value;
 

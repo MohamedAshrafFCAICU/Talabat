@@ -13,7 +13,7 @@ namespace LinkDev.Talabat.Core.Domain.Entities.Orders
 
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
 
-        public OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
         public required Address ShippingAddress { get; set; }
 

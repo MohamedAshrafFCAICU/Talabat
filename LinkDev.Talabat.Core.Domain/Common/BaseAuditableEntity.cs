@@ -5,11 +5,11 @@
         where Tkey : IEquatable<Tkey>
     {
 
-        public string CreatedBy { get; set; } = null!;
+        public required string CreatedBy { get; set; } = null!;
 
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime CreatedOn { get; set; } 
 
-        public string LastModifiedBy { get; set; } = null!;
+        public required string LastModifiedBy { get; set; } = null!;
 
         public DateTime? LastModifiedOn { get; set; } = DateTime.Now;
 
