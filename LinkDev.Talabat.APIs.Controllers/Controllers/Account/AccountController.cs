@@ -26,5 +26,11 @@ namespace LinkDev.Talabat.APIs.Controllers.Controllers.Account
             return Ok(result);
         }
 
+        [HttpGet] // GET: /api/account
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var result = await serviceManager.AuthService.GetCurrentUser(User);
+            return Ok(result);
+        }
     }
 }
