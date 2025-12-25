@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 0,
+    "Name": "Frappuccino",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Latte",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Sandwich",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Tea",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Juice",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Pastry",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Salad",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  }
+]

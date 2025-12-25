@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 0,
+    "Name": "Starbucks",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Costa",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Krispy Kreme",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Gloria Jean's",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Cinnabon",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  },
+  {
+    "Id": 0,
+    "Name": "Peet's Coffee",
+    "CreatedBy": "1",
+    "LastModifiedBy": "1"
+  }
+]
